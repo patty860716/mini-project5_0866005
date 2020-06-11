@@ -1,0 +1,55 @@
+# Last Modified: Thu Jun 11 06:47:40 2020
+#include <tunables/global>
+
+# vim:syntax=apparmor
+# AppArmor policy for px
+# ###AUTHOR###
+# ###COPYRIGHT###
+# ###COMMENT###
+# No template variables specified
+
+
+/usr/local/bin/px {
+  #include <abstractions/base>
+  #include <abstractions/evince>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  
+  capability audit_write,
+  capability dac_override,
+  capability setgid,
+  capability setuid,
+  capability sys_admin,
+  capability sys_chroot,
+  capability net_raw,
+  network inet raw,
+  network inet6 raw,
+  #deny /@{HOME}/** rw,
+
+  /{,usr/}bin/ping mixr,
+  /etc/modules.conf r,
+
+  owner /@{HOME}/mini-project5_0866005/** rw,
+  owner /@{HOME}/mini-project5_0866005/ rw,
+  owner /@{HOME}/* r,
+  /bin/dash mrix,
+  /bin/mv mrix,
+  /bin/rm mrix,
+  /etc/wgetrc r,
+  /lib/x86_64-linux-gnu/ld-*.so mr,
+  /usr/bin/as mrix,
+  /usr/bin/gcc mrix,
+  /usr/bin/ld mrix,
+  /usr/bin/unzip mrix,
+  /usr/bin/git mrix,
+  /usr/bin/x86_64-linux-gnu-as mrix,
+  /usr/bin/x86_64-linux-gnu-gcc-7 mrix,
+  /usr/bin/x86_64-linux-gnu-ld.bfd mrix,
+  /usr/include/** r,
+  /usr/lib/include/* r,
+  /var/Y/ wl,
+  /var/Y/progy ixwl,
+  owner /@{HOME}/progy rw,
+  /{usr/,}lib{,32,64}/** rwix,
+
+}
