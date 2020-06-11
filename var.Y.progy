@@ -1,0 +1,42 @@
+# vim:syntax=apparmor
+# AppArmor policy for progy
+# ###AUTHOR###
+# ###COPYRIGHT###
+# ###COMMENT###
+
+#include <tunables/global>
+
+# No template variables specified
+
+/var/Y/progy {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+  capability audit_write,
+  capability dac_override,
+  capability setgid,
+  capability setuid,
+  capability sys_admin,
+  capability sys_chroot,
+
+  audit deny owner @{HOME}/.* mrwkl,
+  audit deny owner @{HOME}/.*/ rw,
+  audit deny owner @{HOME}/.*/** mrwkl,
+  deny network raw,
+  deny network inet6,
+  #audit deny /usr/local/bin/** mrwkl,
+  #audit deny /usr/bin/** mrwkl,
+ 
+  /var/Y/ rw,
+  /var/Y/** rw,
+  /{usr/,}lib{,32,64}/** rwix,
+ 
+
+  # No abstractions specified
+
+  # No policy groups specified
+
+  # No read paths specified
+
+  # No write paths specified
+}
+
